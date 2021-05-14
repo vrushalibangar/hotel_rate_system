@@ -9,7 +9,7 @@ php artisan migrate
 php artisan db:seed
 ```
 
-Project url : http://localhost/hotel_rate_system/
+Project url : http://localhost/hotel_rate_system/ \n
 Admin panel url : http://localhost/hotel_rate_system/admin
 use 
 username : demoadmin@gmail.com
