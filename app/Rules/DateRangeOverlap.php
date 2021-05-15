@@ -39,7 +39,8 @@ class DateRangeOverlap implements Rule
         $hotel_rate = HotelRate::where('hotel_id',$this->hotel_id)
             ->where(function ($query) use ($attribute,$start_date,$end_date) {
             $query->whereBetween($attribute, [$start_date, $end_date])
-                ->orWhere(DB::raw("'".$start_date."' <= from_date and '".$end_date."' >= to_date"));
+                ->orWhere(DB::raw("'".$start_date."' <= from_date and '".$end_date."' >= to_date"))
+                ->orWhereRaw("(('".$start_date."' BETWEEN from_date AND to_date) OR ('".$end_date."' BETWEEN from_date AND to_date))");
         });
         if($this->hotel_rate_id != ''){
             $hotel_rate->where('id','<>',$this->hotel_rate_id);

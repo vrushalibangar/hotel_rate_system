@@ -94,7 +94,7 @@ class HomeController extends Controller
             $first_record = $hotel_rates->first();
             $check_in_date_time = new DateTime($check_in_date);
             $first_record_end_date_time = new DateTime($first_record->to_date);
-            $first_record_no_of_days = ($first_record_end_date_time->diff($check_in_date_time))->format('%a');
+            $first_record_no_of_days = (($first_record_end_date_time->diff($check_in_date_time))->format('%a'))+1;
             $per_adult_rate += ($first_record_no_of_days*$first_record->adult_rate_per_night);
             $per_child_rate += ($first_record_no_of_days*$first_record->child_rate_per_night);
 
@@ -108,8 +108,8 @@ class HomeController extends Controller
             $hotel_rates->pop();
             if(!empty($hotel_rates)){
                 foreach ($hotel_rates as $rate){
-                    $per_adult_rate += ($rate->total_days *$rate->adult_rate_per_night);
-                    $per_child_rate += ($rate->total_days *$rate->child_rate_per_night);
+                    $per_adult_rate += (($rate->total_days+1) *$rate->adult_rate_per_night);
+                    $per_child_rate += (($rate->total_days+1) *$rate->child_rate_per_night);
                 }
             }
         }else{
